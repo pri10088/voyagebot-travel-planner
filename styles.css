@@ -1,0 +1,234 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-image: url("/assets/Front.jpg"); /* Background image from first code */
+  background-color: #f5f5f5; /* Also add fallback background color from second code */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Added from first */
+  padding: 2rem;
+}
+
+.container,
+.generate-container {
+  width: 100%;
+  max-width: 1000px; /* Using larger width (default 1000px from first code) */
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+  font-size: 1.8rem; /* Taking bigger font from first */
+}
+
+.form-container {
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 0.8rem; /* Padding from second, slightly bigger */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem; /* Slightly bigger font from first */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.hidden {
+  display: none;
+}
+
+.loading {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4caf50;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.results {
+  margin-top: 2rem;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Special styles for generate.html page */
+.generate-container {
+  max-width: 1000px; /* Keep from first */
+}
+
+.generate-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+}
+
+.generate-container th, 
+.generate-container td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.generate-container th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+.generate-container tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Currency Selector Styles */
+#currencySelector {
+  padding: 1px 3px;
+  width: 80px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+#currencySelector:hover {
+  border-color: #888;
+}
+
+#currencySelector:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  outline: none;
+}
+
+#currencyDropdown div {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+#currencyDropdown div:hover {
+  background-color: #f0f0f0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .container,
+  .generate-container {
+    padding: 1.5rem;
+    max-width: 95%;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  input, button {
+    font-size: 1rem;
+    padding: 0.7rem;
+  }
+
+  .generate-container table {
+    font-size: 1rem;
+  }
+}
+
+/* Small Devices */
+@media (max-width: 480px) {
+  .container,
+  .generate-container {
+    padding: 1rem;
+  }
+
+  input, button {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .generate-container table {
+    font-size: 0.9rem;
+  }
+
+  .generate-container th, .generate-container td {
+    padding: 0.7rem;
+  }
+}

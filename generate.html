@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generating Travel Plan...</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .currency-dropdown {
+      display: none;
+      position: absolute;
+      background: white;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+      border-radius: 6px;
+      z-index: 1000;
+    }
+    .currency-dropdown div {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    .currency-dropdown div:hover {
+      background-color: #f0f0f0;
+    }
+    th {
+      position: relative;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Generating Your Plan...</h1>
+
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      
+    </div>
+
+    <div id="results" class="results hidden">
+      <h2>Your Travel Itinerary</h2>
+      <table id="itineraryTable">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Activity</th>
+            <th id="budgetHeader">
+              <span style="display: inline-flex; align-items: center; gap: 4px;">
+                Budget
+                <span style="font-size: 10px;">▼</span>
+              </span>
+              <div class="currency-dropdown" id="currencyDropdown">
+                <div class="currency-option" data-currency="USD">USD ($)</div>
+                <div class="currency-option" data-currency="INR">INR (₹)</div>
+                <div class="currency-option" data-currency="EUR">EUR (€)</div>
+                <div class="currency-option" data-currency="GBP">GBP (£)</div>
+                <div class="currency-option" data-currency="JPY">JPY (¥)</div>
+              </div>
+            </th>
+            <th>Description</th>
+            <th>Wikipedia</th>
+          </tr>
+        </thead>
+        <tbody id="itineraryBody"></tbody>
+      </table>
+
+      <br />
+      <button onclick="goBack()">🔙 Go Back</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

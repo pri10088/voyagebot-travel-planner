@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VoyageBot Travel Planner</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* General Layout */
+      body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      .container {
+        width: 80%;
+        margin: auto;
+        padding: 50px 0;
+      }
+
+      /* Professional Styling for Title */
+      h1 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: #e4e6e8;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        background: linear-gradient(to left, #007bff, #00d4ff);
+        -webkit-background-clip: text;
+        color: transparent;
+        animation: fadeInTitle 1s ease-out;
+      }
+
+      @keyframes fadeInTitle {
+        0% {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Form Section */
+      .form-container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 50px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        font-size: 1rem;
+        margin-bottom: 5px;
+        display: block;
+      }
+
+      input[type="text"],
+      input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      input[type="text"]:focus,
+      input[type="date"]:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Project Overview Section */
+      .project-overview {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .project-overview.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Activity Boxes Section */
+      .activity-boxes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 40px;
+      }
+
+      .activity-box {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .activity-box.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Hover effect for shrinking */
+      .activity-box:hover {
+        transform: scale(0.95); /* Shrinks the box to 95% of its original size */
+      }
+
+      /* Activity Box Titles and Descriptions */
+      .activity-box h3 {
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+      }
+
+      .activity-box p {
+        font-size: 1rem;
+        color: #555;
+      }
+
+      .activity-box i {
+        font-size: 2rem;
+        color: #007bff;
+        margin-bottom: 10px;
+      }
+
+      /* Add Section Titles */
+      h2 {
+        font-size: 2rem;
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 40px;
+      }
+
+      /* Clean Footer */
+      footer {
+        margin-top: 50px;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="font-family: cursive;">VoyageBot - Travel Planner </h1>
+
+      <!-- Form Section -->
+      <div class="form-container">
+        <form id="travelForm" action="generate.html" method="GET" onsubmit="return validateForm()">
+          <div class="form-group">
+            <label for="destination">Destination:</label>
+            <input
+              type="text"
+              id="destination"
+              name="destination"
+              required
+              placeholder="Enter your destination"
+            />
+          </div>
+          <div class="form-group">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required />
+          </div>
+          <div class="form-group">
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" required />
+          </div>
+          <button type="submit">Generate Itinerary</button>
+        </form>
+      </div>
+
+      <!-- Project Overview Section -->
+      <div class="project-overview">
+        <h2>Project Overview</h2>
+        <p>
+          The AI Travel Planner is an innovative platform designed to assist
+          travelers in planning their trips effortlessly. By simply entering your
+          destination and travel dates, the AI will generate a personalized
+          itinerary that suits your preferences and needs.
+        </p>
+      </div>
+
+      <!-- Features Section -->
+      <h2>Features</h2>
+      <div class="activity-boxes">
+        <div class="activity-box">
+          <i class="fas fa-calendar-day"></i>
+          <h3>Smart Itinerary Generation</h3>
+          <p>
+            The system intelligently generates a travel itinerary based on user
+            preferences, considering factors such as destination, dates, and
+            available activities.
+          </p>
+        </div>
+        <div class="activity-box">
+          <i class="fas fa-sun"></i>
+          <h3>Dynamic Suggestions</h3>
+          <p>
+            As you update your travel dates or preferences, the system dynamically
+            suggests new activities and events.
+          </p>
+        </div>
+        <div class="activity-box">
+          <i class="fas fa-share-alt"></i>
+          <h3>Seamless Integration</h3>
+          <p>
+            The planner integrates with other travel services to provide booking
+            options and real-time updates for your trip.
+          </p>
+        </div>
+        <div class="activity-box">
+          <i class="fas fa-cogs"></i>
+          <h3>Customizable Plans</h3>
+          <p>
+            Users can customize their itineraries, choosing activities, accommodation,
+            and local experiences to match their needs.
+          </p>
+        </div>
+        <div class="activity-box">
+          <i class="fas fa-globe"></i>
+          <h3>Global Travel Insights</h3>
+          <p>
+            Get information about local cultures, customs, and essential travel tips
+            for your destination.
+          </p>
+        </div>
+        <div class="activity-box">
+          <i class="fas fa-users"></i>
+          <h3>Group Collaboration</h3>
+          <p>
+            Share your plans with friends and family to collaborate and make decisions
+            together.
+          </p>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <p>&copy; 2025 Shanmuga Priya AR. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <!-- FontAwesome CDN for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <script>
+      // Form validation function
+      function validateForm() {
+        let destination = document.getElementById("destination").value;
+        let startDate = document.getElementById("startDate").value;
+        let endDate = document.getElementById("endDate").value;
+        
+        if (destination === "" || startDate === "" || endDate === "") {
+          alert("All fields are required!");
+          return false;
+        }
+        return true;
+      }
+
+      // Function to detect scroll and add visibility class
+      const overviewSection = document.querySelector('.project-overview');
+      const activityBoxes = document.querySelectorAll('.activity-box');
+
+      function checkScroll() {
+        const overviewRect = overviewSection.getBoundingClientRect();
+        if (overviewRect.top < window.innerHeight && overviewRect.bottom >= 0) {
+          overviewSection.classList.add('visible');
+        }
+
+        activityBoxes.forEach((box) => {
+          const rect = box.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom >= 0) {
+            box.classList.add('visible');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', checkScroll);
+      checkScroll(); // Check initially in case the section is already in view
+    </script>
+  </body>
+</html>
