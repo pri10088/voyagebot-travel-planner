@@ -166,15 +166,15 @@ const API_KEY =
         selectedCurrency = e.target.getAttribute("data-currency");
         renderItinerary();
         currencyDropdown.style.display = "none";
-      });
+      });   //final version
     });
   
     document.addEventListener("click", () => {
       currencyDropdown.style.display = "none";
     });
   
-    fetchItinerary(); 
+    fetchItinerary();   //final version
   }
-  
+  //final version
   
   
